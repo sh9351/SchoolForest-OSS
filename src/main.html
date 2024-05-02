@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="global.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js"></script> -->
+    <title>학교숲</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+        * {
+            font-family: Pretendard;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        html::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="position-absolute top-50 start-50 translate-middle rounded-3 overlay text-center">
+        <img src="logo.png" width="100" height="100" class="mb-2">
+        <h3 class="loading-text">브라우저의 설정에서 Javascript 자바스크립트를 허용해 주세요!</h3>
+    </div>
+    <main class="d-none">
+        <div class="container">
+            <header
+                class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+                <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+                    <img src="logo.png" width="40" height="40">
+                    <h2 class="ms-3 schoolname"></h2>
+                    <h2 class="text-black-50">|학교숲</h2>
+                </a>
+                <ul class="nav">
+                    <li><a href="#" class="nav-link px-2 link-dark">게시판</a></li>
+                </ul>
+            </header>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="shadow-sm col-2 border border-black rounded m-2">
+                    <img width="70" height="70" class="rounded mt-2 mb-2 userProfile">
+                    <h2 class="d-inline ms-2 align-middle text-nowrap userName"></h2>
+                </div>
+                <div class="shadow-sm col border border-black rounded m-2">
+                    <h1 class="mb-0 userClass"></h1>
+                    <h4 class="recentArticle text-nowrap"></h4>
+                </div>
+                <div class="shadow-sm col-6 border border-black rounded m-2">
+                    <h1 class="mb-0 currentDate"></h1>
+                    <h5 class="mb-0 cheerup-text"></h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="shadow-sm col border border-black rounded m-2">
+                    <h2 class="mt-2">학교숲 서비스가 오픈했어요!</h2>
+                </div>
+            </div>
+            <div class="row menulist">
+            </div>
+            <div class="row">
+                <div class="shadow-sm col border border-black rounded m-2">
+                    <h2 class="mt-2 mb-0">오늘의 급식</h2>
+                    <span class="meallist_mlsv text-black-50"></span>
+                    <div class="meallist"></div>
+                    <h3 class="meallist_kcal"></h3>
+                </div>
+                <div class="shadow-sm col border border-black rounded m-2">
+                    <h2 class="mt-2">오늘의 시간표</h2>
+                    <div class="timetablelist"></div>
+                </div>
+                <div class="shadow-sm col border border-black rounded m-2">
+                    <h2 class="mt-2">이번달의 학사일정</h2>
+                    <div class="schedulelist"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="shadow-sm col border border-black rounded m-2">
+                    <h2 class="mt-2 board1Title text-nowrap"></h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">번호</th>
+                                <th scope="col">제목</th>
+                                <th scope="col">날짜</th>
+                                <th scope="col">작성자</th>
+                            </tr>
+                        </thead>
+                        <tbody class="board1Table">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="shadow-sm col border border-black rounded m-2">
+                    <h2 class="mt-2 board2Title text-nowrap"></h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">번호</th>
+                                <th scope="col">제목</th>
+                                <th scope="col">날짜</th>
+                                <th scope="col">작성자</th>
+                            </tr>
+                        </thead>
+                        <tbody class="board2Table">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="shadow-sm col border border-black rounded m-2">
+                    <h2 class="mt-2">교육 뉴스</h2>
+                    <a class="text-decoration-none newslist_url">EBS에서 정보를 제공받아요.</a>
+                    <table class="table newslist">
+                        <thead>
+                            <tr>
+                                <th scope="col">번호</th>
+                                <th scope="col">제목</th>
+                                <th scope="col">날짜</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <form action="https://www.ebsi.co.kr/ebs/ent/enta/retrieveEntNewsView.ebs" method="POST" target="_blank"
+                    class="newsForm">
+                    <input type="hidden" name="bbsCd" value="B011">
+                    <input type="hidden" name="datNo" class="newsID">
+                </form>
+            </div>
+            <div class="row">
+                <div class="shadow-sm col border border-black rounded m-2">
+                    <h2 class="mt-2">인기 도서</h2>
+                    <a class="text-decoration-none booklist_host">각 시도별 독서교육종합지원시스템에서 정보를
+                        제공받아요.</a>
+                    <table class="table booklist">
+                        <thead>
+                            <tr>
+                                <th scope="col">번호</th>
+                                <th scope="col">제목</th>
+                                <th scope="col">날짜</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+                <div class="col-md-4 d-flex align-items-center">
+                    <img src="logo.png" width="50" height="50" class="me-2">
+                    <span>&copy; 2022 <a href="https://sh9351.github.io" class="text-decoration-noner">임세훈</a>이 ❤️을 담아
+                        제작했어요</span>
+                </div>
+                <a href="https://getbootstrap.kr">Bootstrap으로 만들었어요</a>
+            </footer>
+        </div>
+    </main>
+    <script>
+        const loading_text_list = [
+            '오늘 점심 확인하는 중',
+            '이번달 점심 안내장 안 붙었다고 선생님께 따지는 중',
+            '오늘 급식 스테이크 나오는지 확인하는 중',
+            '오늘 6교시인지 확인하는 중',
+            '오늘 체육 들었는지 확인하는 중',
+            '오늘 숙제 있었는지 확인하는 중',
+            '우유 배달하다 회전회오리 걸려서 혼나는 중',
+            '콴다 찍다 선생님께 걸려서 혼나는 중',
+            '지브리 스튜디오 음악 트는 중',
+            '우유에 제티 타다가 흘려서 닦는 중',
+            '오X학교 애들 째려보는 중'
+        ]
+        const showLoadingText = () => {
+            document.querySelector('.loading-text').innerHTML = ''
+            const loading_text = loading_text_list[Math.floor(Math.random() * loading_text_list.length)].split('')
+            const type = char => setTimeout(() => {
+                if (char >= loading_text.length) {
+                    setTimeout(showLoadingText, 500)
+                    return
+                }
+                document.querySelector('.loading-text').innerHTML += loading_text[char]
+                type(char + 1)
+            }, 50)
+            type(0)
+        }
+        showLoadingText()
+        const cheerup_text = [
+            '학교숲의 개발자는 정말 잘생겼다. -임세훈',
+            '행동은 모든 성공의 열쇠이다. -파블로 피카소',
+            '할 수 있다고 믿어라, 그러면 이미 반은 성공한 것이다. -루즈벨트',
+            '미래는 현재 우리가 무엇을 하는가에 달려있다. -마하무트 간디',
+            '할 수 있다고 믿는 사람은 결국 그렇게 된다. -샤를 드골',
+            '성공이라는 못을 박으려면 끈질김이란 망치가 필요하다. -존 메이슨',
+            '실패가 아니라 노력하지 않는 것이 두렵다. -마이클 조던',
+            '기회는 오는 게 아니라 만드는 것이다. -크리스 그로서',
+            '삶이 있는 한 희망은 있다. -키케로',
+            '피할수 없으면 즐겨라 -로버트 엘리엇',
+            '긍정적인 태도는 강력한 힘을 갖는다. -매들린 랭글',
+            '나의 배로 항해하는 나는 폭풍이 두렵지 않다. -헬렌 켈러',
+            '실패란 넘어진 자리에 머무는 것이다. -아네스 안'
+        ]
+        document.querySelector('.cheerup-text').innerHTML = cheerup_text[Math.floor(Math.random() * cheerup_text.length)]
+        const userName = document.querySelector('.userName')
+        const userProfile = document.querySelector('.userProfile')
+        const userClass = document.querySelector('.userClass')
+        window.addEventListener('user', () => {
+            userName.innerHTML = user.name
+            userProfile.src = 'https://avatars.dicebear.com/api/big-ears-neutral/' + user.name + '.svg'
+            userClass.innerHTML = user.grade + '학년 ' + user.class + '반'
+        })
+        const days = ['일', '월', '화', '수', '목', '금', '토']
+        api('/api/main').then(json => {
+            const [menu, school, board, news, book] = json
+            const schoolname = document.querySelector('.schoolname')
+            const currentDate = document.querySelector('.currentDate')
+            const menulist = document.querySelector('.menulist')
+            const meallist = document.querySelector('.meallist')
+            const meallist_kcal = document.querySelector('.meallist_kcal')
+            const meallist_mlsv = document.querySelector('.meallist_mlsv')
+            const timetablelist = document.querySelector('.timetablelist')
+            const recentArticle = document.querySelector('.recentArticle')
+            const boards = [
+                {
+                    title: document.querySelector('.board1Title'),
+                    table: document.querySelector('.board1Table')
+                },
+                {
+                    title: document.querySelector('.board2Title'),
+                    table: document.querySelector('.board2Table')
+                }
+            ]
+            const schedulelist = document.querySelector('.schedulelist')
+            const newslist = document.querySelector('.newslist')
+            const booklist = document.querySelector('.booklist')
+            const today = new Date
+            currentDate.innerHTML = today.getFullYear() + '. ' + (today.getMonth() + 1) + '. ' + today.getDate() + '.'
+            menu.value.forEach(i => {
+                const div = document.createElement('div')
+                div.classList = 'shadow-sm col border border-black rounded m-2'
+                const img = document.createElement('img')
+                img.width = 50
+                img.height = 50
+                img.src = i.icon
+                img.classList = 'rounded mt-2 mb-2'
+                div.appendChild(img)
+                const h2 = document.createElement('h2')
+                h2.classList = 'align-middle ms-2 d-inline'
+                h2.innerHTML = i.name
+                h2.addEventListener('click', () => window.open(i.url))
+                div.appendChild(h2)
+                menulist.appendChild(div)
+            })
+            if (school.status == 'rejected') {
+                meallist.innerHTML = '오늘의 급식 정보를 불러오지 못했어요.<br>' + school.reason
+                schedulelist.innerHTML = '이번달의 학사일정 정보를 불러오지 못했어요.<br>' + school.reason
+                timetablelist.innerHTML = '오늘의 시간표 정보를 불러오지 못했어요.<br>' + school.reason
+            } else {
+                if (school.value[0].status == 'rejected') {
+                    meallist.innerHTML = '오늘의 급식 정보를 불러오지 못했어요.<br>' + school.value[0].reason
+                } else {
+                    meallist_kcal.innerHTML = school.value[0].value.CAL_INFO
+                    meallist_mlsv.innerHTML = school.value[0].value.MLSV_FGR + '명이 오늘 이 급식을 먹어요.'
+                    school.value[0].value.DDISH_NM.split('<br>').forEach(i => {
+                        const meal = document.createElement('h5')
+                        meal.innerHTML = i
+                        meallist.appendChild(meal)
+                    })
+                }
+                if (school.value[1].status == 'rejected') {
+                    schedulelist.innerHTML = '이번달의 학사일정 정보를 불러오지 못했어요.<br>' + school.value[1].reason
+                } else {
+                    school.value[1].value.forEach(i => {
+                        const date = new Date(i.AA_YMD.substring(0, 4), i.AA_YMD.substring(4, 6) - 1, i.AA_YMD.substring(6, 8))
+                        const event = document.createElement('h5')
+                        event.innerHTML = i.EVENT_NM
+                        const badge = document.createElement('span')
+                        badge.classList = 'badge ms-1 rounded-pill align-middle text-bg-' + (date.getDay() == 0 | date.getDay() == 6 ? 'secondary' : 'primary')
+                        badge.innerHTML = date.getMonth() + 1 + '월 ' + date.getDate() + '일 (' + days[date.getDay()] + ')'
+                        event.appendChild(badge)
+                        const br = document.createElement('br')
+                        event.appendChild(br)
+                        schedulelist.appendChild(event)
+                    })
+                }
+                if (school.value[2].status == 'rejected') {
+                    timetablelist.innerHTML = '오늘의 시간표 정보를 불러오지 못했어요.<br>' + school.value[2].reason
+                } else {
+                    school.value[2].value.forEach(i => {
+                        const timetable = document.createElement('h5')
+                        timetable.innerHTML = i.ITRT_CNTNT
+                        timetablelist.appendChild(timetable)
+                    })
+                }
+            }
+            if (board.status == 'rejected') {
+                boards[0].table.innerHTML = '최신 게시글 정보를 불러오지 못했어요.<br>' + board.reason
+                boards[1].table.innerHTML = '최신 게시글 정보를 불러오지 못했어요.<br>' + board.reason
+            } else {
+                const articles = board.value[0].articles
+                recentArticle.addEventListener('click', () => {
+                    location.href = '/board/' + board.value[0].title + '/' + articles[0].id
+                })
+                recentArticle.innerHTML = articles[0].title.replaceAll('<', '&lt;').replaceAll('>', '&gt;')
+                setInterval(() => {
+                    articles.push(articles.shift())
+                    recentArticle.innerHTML = articles[0].title.replaceAll('<', '&lt;').replaceAll('>', '&gt;')
+                }, 5000)
+                for (let bi = 0; bi < 2; bi++) {
+                    try {
+                        boards[bi].title.innerHTML = board.value[bi].title.replaceAll('<', '&lt;').replaceAll('>', '&gt;')
+                        boards[bi].title.addEventListener('click', () => location.href = '/board/' + board.value[bi].title)
+                        board.value[bi].articles.forEach((e, i) => {
+                            const tr = document.createElement('tr')
+                            const num = document.createElement('th')
+                            num.innerHTML = '#' + (i + 1)
+                            tr.appendChild(num)
+                            const title = document.createElement('td')
+                            title.innerHTML = e.title.replaceAll('<', '&lt;').replaceAll('>', '&gt;')
+                            title.addEventListener('click', () => {
+                                location.href = '/board/' + board.value[bi].title + '/' + e.id
+                            })
+                            tr.appendChild(title)
+                            const date = document.createElement('td')
+                            const articleDate = new Date(e.time)
+                            date.innerHTML = articleDate.getFullYear() + '. ' + (articleDate.getMonth() + 1) + '. ' + articleDate.getDate()
+                            tr.appendChild(date)
+                            const author = document.createElement('td')
+                            author.innerHTML = e.author
+                            tr.appendChild(author)
+                            boards[bi].table.appendChild(tr)
+                        })
+                    } catch (e) {
+                        boards[bi].table.innerHTML = '최신 게시글 정보를 불러오지 못했어요.<br>' + e
+                    }
+                }
+            }
+            if (news.status == 'rejected') {
+                newslist.innerHTML = '교육 뉴스 정보를 불러오지 못했어요.<br>' + news.reason
+            } else {
+                if (news.value.type == 'primary') {
+                    document.querySelector('.newslist_url').addEventListener('click', () => window.open('https://primary.ebs.co.kr/book/edu/edunews#eduNews/list/130///1'))
+                } else if (news.value.type == 'mid') {
+                    document.querySelector('.newslist_url').addEventListener('click', () => window.open('https://mid.ebs.co.kr/book/edu/edunews#eduNewsParent/list/113///1'))
+                } else {
+                    document.querySelector('.newslist_url').addEventListener('click', () => window.open('https://www.ebsi.co.kr/ebs/ent/enta/retrieveEntNewsEduList.ebs'))
+                }
+                news.value.data.forEach((e, i) => {
+                    const tbody = document.createElement('tbody')
+                    const tr = document.createElement('tr')
+                    const number = document.createElement('th')
+                    number.innerHTML = '#' + (i + 1)
+                    tr.appendChild(number)
+                    const title = document.createElement('td')
+                    title.innerHTML = e.title
+                    if (news.value.type == 'primary') {
+                        title.addEventListener('click', () => window.open('https://primary.ebs.co.kr/book/edu/edunews' + e.url))
+                    } else if (news.value.type == 'mid') {
+                        title.addEventListener('click', () => window.open('https://mid.ebs.co.kr/book/edu/edunews' + e.url))
+                    } else {
+                        title.addEventListener('click', () => {
+                            document.querySelector('.newsID').value = e.id
+                            document.querySelector('.newsForm').submit()
+                        })
+                    }
+                    tr.appendChild(title)
+                    const date = document.createElement('td')
+                    date.innerHTML = e.date.includes(':') ? e.date.split(':')[0] + '시 ' + e.date.split(':')[1] + '분' : '20' + e.date?.replaceAll('.', '. ')
+                    tr.appendChild(date)
+                    tbody.appendChild(tr)
+                    newslist.appendChild(tbody)
+                })
+            }
+            if (book.status == 'rejected') {
+                newslist.innerHTML = '인기 도서 정보를 불러오지 못했어요.<br>' + news.reason
+            } else {
+                document.querySelector('.booklist_host').addEventListener('click', () => window.open('https://' + book.value.host + '/r/newReading/main/mainPopularDataPop.jsp'))
+                book.value.data.forEach((e, i) => {
+                    const tbody = document.createElement('tbody')
+                    const tr = document.createElement('tr')
+                    const number = document.createElement('th')
+                    number.innerHTML = '#' + (i + 1)
+                    tr.appendChild(number)
+                    const title = document.createElement('td')
+                    title.innerHTML = e.title
+                    tr.appendChild(title)
+                    const author = document.createElement('td')
+                    author.innerHTML = e.author
+                    tr.appendChild(author)
+                    tbody.appendChild(tr)
+                    booklist.appendChild(tbody)
+                })
+            }
+            document.querySelector('main').classList.remove('d-none')
+            document.querySelector('.overlay').classList.add('d-none')
+        })
+    </script>
+</body>
+
+</html>

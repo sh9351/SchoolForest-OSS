@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js"></script> -->
+    <title>정보 | 학교숲</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+        * {
+            font-family: Pretendard;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        html::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="container">
+            <header
+                class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+                <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+                    <img src="/logo.png" width="40" height="40">
+                    <h2 class="ms-3">학교숲</h2>
+                </a>
+                <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="#" class="nav-link px-2 link-dark">시간표</a></li>
+                    <li><a href="#" class="nav-link px-2 link-dark">커뮤니티</a></li>
+                </ul>
+                <div class="col-md-3 text-end">
+                    <button type="button" class="btn btn-outline-primary me-2">로그인</button>
+                    <button type="button" class="btn btn-primary">회원가입</button>
+                </div>
+            </header>
+        </div>
+        <div class="px-4 py-5 my-5 text-center">
+            <img class="d-block mx-auto mb-4" src="/logo.png" width="100" height="100">
+            <h1 class="display-5 fw-bold">우리들의 소통공간 학교숲</h1>
+            <div class="col-lg-6 mx-auto">
+                <p class="lead mb-4">학교숲은 우리 학교 학생들만의 소통의 장을 열기 위해 만들어진 공간이에요.</p>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                    <button type="button" class="btn btn-primary btn-lg px-4 gap-3"
+                        onclick="document.querySelector('.about').scrollIntoView()">더 알아보기</button>
+                    <a href="/signup" type="button" class="btn btn-outline-secondary btn-lg px-4">회원가입</a>
+                </div>
+            </div>
+        </div>
+        <div class="about container col-xxl-8 px-4 py-5">
+            <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+                <div class="col-10 col-sm-8 col-lg-6">
+                    <img src="/hearts.jpg" class="d-block mx-lg-auto img-fluid rounded" width="700" height="500"
+                        loading="lazy">
+                </div>
+                <div class="col-lg-6">
+                    <h1 class="display-5 fw-bold mb-3">프롤로그</h1>
+                    <p class="lead">학교숲은 단 하나의 문제를 해결하고자 만들어졌어요. 모두들 학교에서는 활발하게 대화하는데, 하교 후에는 서로 이야기를 주고받을 길이 없었어요. 또한
+                        학교에서는 내가 모르는 학생들과 다가가기가 매우 어려웠어요.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="about container col-xxl-8 px-4 py-5">
+            <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+                <div class="col-lg-6">
+                    <h1 class="display-5 fw-bold mb-3">학교숲의 시작</h1>
+                    <p class="lead">그래서 학교숲이 만들어지게 되었어요. 우리 모두가 함께 소통하고 자유롭게 정보를 나눌 수 있도록, 소통의 장이 열리게 되었어요. 학교숲의 목적은 언제나
+                        안전하고 행복한 소통의 공간을 여는 것이에요.
+                    </p>
+                </div>
+                <div class="col-10 col-sm-8 col-lg-6">
+                    <img src="/community.jpg" class="d-block mx-lg-auto img-fluid rounded" width="700" height="500"
+                        loading="lazy">
+                </div>
+            </div>
+        </div>
+        <div class="container px-4 py-5">
+            <h1 class="pb-2 text-center">학교숲의 주요 인물들</h1>
+            <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+                <div class="col">
+                    <img src="https://sh9351.github.io/profile.jpg" width="100" height="100" class="rounded-3">
+                    <h3 class="fs-2">임세훈</h3>
+                    <p>임세훈이 학교숲의 주요 기능을 개발했어요.</p>
+                    <a href="https://sh9351.github.io" class="icon-link d-inline-flex align-items-center">
+                        포트폴리오 보러가기
+                    </a>
+                </div>
+                <div class="col">
+                    <img src="/sericea.jpg" width="100" height="100" class="rounded-3">
+                    <h3 class="fs-2">세리시아</h3>
+                    <p>학교숲의 개발 과정에 피드백을 남겨주셨어요.</p>
+                    <a href="https://www.youtube.com/channel/UCj9YXqxqqJyuipR9tZBNtvA?sub_confirmation=1"
+                        class="icon-link d-inline-flex align-items-center">
+                        유튜브 구독하기
+                    </a>
+                </div>
+                <div class="col">
+                    <img src="/feedback.jpg" width="100" height="100" class="rounded-3">
+                    <h3>여러분의 의견</h3>
+                    <p>학교숲은 항상 열린 귀로 의견을 받고있어요! 언제든지 의견을 제출해 주세요.</p>
+                    <a href="" class="icon-link d-inline-flex align-items-center">
+                        의견 제출하기
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        window.api = (url, body) => new Promise(resolve => fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => {
+            if (res.ok) res.json().then(resolve)
+            else res.text().then(alert)
+        }))
+    </script>
+</body>
+
+</html>

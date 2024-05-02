@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="../global.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js"></script> -->
+    <title>게시글 목록 | 학교숲</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+        * {
+            font-family: Pretendard;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        html::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="container">
+            <header
+                class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+                <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+                    <img src="./../logo.png" width="40" height="40">
+                    <h2 class="ms-3 schoolname"></h2>
+                    <h2 class="text-black-50">|학교숲</h2>
+                </a>
+                <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="#" class="nav-link px-2 link-dark">시간표</a></li>
+                    <li><a href="#" class="nav-link px-2 link-dark">커뮤니티</a></li>
+                </ul>
+                <div class="col-md-3 text-end">
+                    <button type="button" class="btn btn-outline-primary me-2">로그인</button>
+                    <button type="button" class="btn btn-primary">회원가입</button>
+                </div>
+            </header>
+        </div>
+        <div class="container">
+            <h5 class="text-primary">
+                <a class="text-decoration-none boardSchoolNameReturn">
+                    ←<span class="boardSchoolName"></span>(으)로 돌아가기
+                </a>
+            </h5>
+            <h1 class="boardTitle"></h1>
+            <h4>
+                <a class="boardAuthor"></a>
+                |
+                <span class="boardDate"></span>
+            </h4>
+            <a class="btn btn-primary btn-sm float-end d-inline text-decoration-none boardWrite">게시글 작성하기</a>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">번호</th>
+                        <th scope="col">제목</th>
+                        <th scope="col">날짜</th>
+                        <th scope="col">작성자</th>
+                    </tr>
+                </thead>
+                <tbody class="board">
+                </tbody>
+            </table>
+            <div class="text-center border border-black rounded">
+                <div class="m-2">
+                    <h1>이곳에 들어갈 스폰서를 구합니다!</h1>
+                    <h2>전국 각지의 학생들이 믿고 선택한 학교숲에서 원하는 광고를 집행해 보세요.</h2>
+                </div>
+            </div>
+            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+                <div class="col-md-4 d-flex align-items-center">
+                    <img src="./../logo.png" width="50" height="50" class="me-2">
+                    <span>&copy; 2022 <a href="https://sh9351.github.io" class="text-decoration-noner">임세훈</a>이 ❤️을 담아
+                        제작했어요</span>
+                </div>
+                <a href="https://getbootstrap.kr">Bootstrap으로 만들었어요</a>
+            </footer>
+        </div>
+    </main>
+    <script>
+        const { pathname } = new URL(location.href)
+        const board = document.querySelector('.board')
+        const boardDate = document.querySelector('.boardDate')
+        const boardAuthor = document.querySelector('.boardAuthor')
+        const boardSchoolName = document.querySelector('.boardSchoolName')
+        const boardSchoolNameReturn = document.querySelector('.boardSchoolNameReturn')
+        window.addEventListener('user', () => {
+            boardSchoolName.innerHTML = user.school.kraOrgNm
+            boardSchoolNameReturn.href = '/board'
+        })
+        api('/api/board/articles', {
+            board: decodeURI(pathname.split('/')[2])
+        }).then(data => {
+            document.querySelector('.boardTitle').innerHTML = data.title.replaceAll('<', '&lt;').replaceAll('>', '&gt;')
+            document.querySelector('.boardWrite').href = '/board/write/' + data.title
+            const date = new Date(data.time)
+            boardDate.innerHTML = date.getFullYear() + '. ' + (date.getMonth() + 1) + '. ' + date.getDate()
+            boardAuthor.innerHTML = data.author
+            boardAuthor.addEventListener('click', () => location.href = '/user/' + data.author)
+            data.articles.sort((a, b) => b.time - a.time).forEach((e, i) => {
+                const tr = document.createElement('tr')
+                const num = document.createElement('th')
+                num.innerHTML = '#' + (i + 1)
+                tr.appendChild(num)
+                const title = document.createElement('td')
+                title.innerHTML = e.title.replaceAll('<', '&lt;').replaceAll('>', '&gt;')
+                title.addEventListener('click', () => {
+                    location.href = pathname + '/' + e.id
+                })
+                tr.appendChild(title)
+                const date = document.createElement('td')
+                const articleDate = new Date(e.time)
+                date.innerHTML = articleDate.getFullYear() + '. ' + (articleDate.getMonth() + 1) + '. ' + articleDate.getDate()
+                tr.appendChild(date)
+                const author = document.createElement('td')
+                author.innerHTML = e.author
+                tr.appendChild(author)
+                board.appendChild(tr)
+            })
+        })
+    </script>
+</body>
+
+</html>

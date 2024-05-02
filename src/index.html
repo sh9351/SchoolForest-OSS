@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js"></script> -->
+    <title>학교숲</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+        * {
+            font-family: Pretendard;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        html::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="container">
+            <header
+                class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+                <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+                    <img src="/logo.png" width="40" height="40">
+                    <h2 class="ms-3">학교숲</h2>
+                </a>
+                <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="#" class="nav-link px-2 link-dark">시간표</a></li>
+                    <li><a href="#" class="nav-link px-2 link-dark">커뮤니티</a></li>
+                </ul>
+                <div class="col-md-3 text-end">
+                    <button type="button" class="btn btn-outline-primary me-2">로그인</button>
+                    <button type="button" class="btn btn-primary">회원가입</button>
+                </div>
+            </header>
+        </div>
+        <div class="px-4 py-5 my-5 text-center">
+            <img class="d-block mx-auto mb-4" src="/logo.png" alt="" width="100" height="100">
+            <h1 class="display-5 fw-bold">믿을 수 있는 우리 학교 커뮤니티</h1>
+            <div class="col-lg-6 mx-auto">
+                <p class="lead mb-4">학교숲은 우리 학교만의 정보를 공유할 수 있는 학생들만의 커뮤니티에요.<br>간단한 고민부터 재미있는 수다, 진로 고민까지 모두 학교숲에서 해결해 보세요.</p>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                    <a type="button" class="btn btn-primary btn-lg px-4 gap-3" href="/signup">회원가입</a>
+                    <a type="button" class="btn btn-outline-secondary btn-lg px-4" href="/login">로그인</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        window.api = (url, body) => new Promise(resolve => fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => {
+            if (res.ok) res.json().then(resolve)
+            else res.text().then(alert)
+        }))
+    </script>
+</body>
+
+</html>

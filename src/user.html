@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="./../global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@2.4.0/dist/purify.min.js"></script>
+    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js"></script> -->
+    <title>사용자 보기 | 학교숲</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+        * {
+            font-family: Pretendard;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        html::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="container">
+            <header
+                class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+                <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+                    <img src="./../../logo.png" width="40" height="40">
+                    <h2 class="ms-3 schoolname"></h2>
+                    <h2 class="text-black-50">|학교숲</h2>
+                </a>
+                <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="#" class="nav-link px-2 link-dark">시간표</a></li>
+                    <li><a href="#" class="nav-link px-2 link-dark">커뮤니티</a></li>
+                </ul>
+                <div class="col-md-3 text-end">
+                    <button type="button" class="btn btn-outline-primary me-2">로그인</button>
+                    <button type="button" class="btn btn-primary">회원가입</button>
+                </div>
+            </header>
+        </div>
+        <div class="container">
+            <h1 class="userId mb-0 d-inline"></h1>
+            <h4 class="userName text-black-50 d-inline"></h4>
+            <h4>
+                <span class="badge rounded-pill text-bg-primary userGrade"></span>
+                <span class="badge rounded-pill text-bg-success userVerified"></span>
+                <span class="badge rounded-pill text-bg-success userParentalVerified"></span>
+            </h4>
+            <div class="row">
+                <div class="col border border-black rounded mb-2">
+                    <div class="m-2">
+                        <h2>소개</h2>
+                        <div class="userProfile"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col border border-black rounded mb-2">
+                    <div class="m-2">
+                        <h2>최신 게시글</h2>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">번호</th>
+                                    <th scope="col">게시판</th>
+                                    <th scope="col">제목</th>
+                                    <th scope="col">날짜</th>
+                                </tr>
+                            </thead>
+                            <tbody class="userRecentArticles">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+                <div class="col-md-4 d-flex align-items-center">
+                    <img src="./../logo.png" width="50" height="50" class="me-2">
+                    <span>&copy; 2022 <a href="https://sh9351.github.io" class="text-decoration-noner">임세훈</a>이 ❤️을 담아
+                        제작했어요</span>
+                </div>
+                <a href="https://getbootstrap.kr">Bootstrap으로 만들었어요</a>
+            </footer>
+        </div>
+    </main>
+    <script>
+        const { sanitize } = DOMPurify
+        window.addEventListener('user', () => {
+            const userId = document.querySelector('.userId')
+            const userName = document.querySelector('.userName')
+            const userGrade = document.querySelector('.userGrade')
+            const userVerified = document.querySelector('.userVerified')
+            const userParentalVerified = document.querySelector('.userParentalVerified')
+            const userProfile = document.querySelector('.userProfile')
+            const userRecentArticles = document.querySelector('.userRecentArticles')
+            const { pathname } = new URL(location.href)
+            api('/api/user/' + decodeURI(pathname.split('/')[2])).then(data => {
+                const { grade, class: classNumber, id, kraOrgNm, name, parentalVerificationVerified, profile, articles } = data
+                userName.innerHTML = name
+                userGrade.innerHTML = grade + '학년 ' + classNumber + '반'
+                userVerified.innerHTML = kraOrgNm + ' 재학 인증 완료'
+                if (parentalVerificationVerified) {
+                    userParentalVerified.innerHTML = '법정대리인 인증 완료'
+                }
+                userId.innerHTML = id
+                // TUI Editor로 변경
+                userProfile.innerHTML = sanitize(profile)
+                articles.map((e, i) => {
+                    const tr = document.createElement('tr')
+                    const num = document.createElement('th')
+                    num.innerHTML = '#' + (i + 1)
+                    tr.appendChild(num)
+                    const board = document.createElement('th')
+                    board.innerHTML = sanitize(e.board)
+                    board.addEventListener('click', () => location.href = '/board/' + e.board)
+                    tr.appendChild(board)
+                    const title = document.createElement('th')
+                    title.classList = 'text-nowrap'
+                    title.innerHTML = sanitize(e.title)
+                    title.addEventListener('click', () => location.href = '/board/' + e.board + '/' + e.id)
+                    tr.appendChild(title)
+                    const date = document.createElement('td')
+                    const articleDate = new Date(e.time)
+                    date.innerHTML = articleDate.getFullYear() + '. ' + (articleDate.getMonth() + 1) + '. ' + articleDate.getDate()
+                    tr.appendChild(date)
+                    userRecentArticles.appendChild(tr)
+                })
+            })
+        })
+    </script>
+</body>
+
+</html>

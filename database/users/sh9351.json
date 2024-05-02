@@ -1,0 +1,24 @@
+{
+    "info": {
+        "school": {
+            "kraOrgNm": "[REDACTED]",
+            "zipAdres": "[REDACTED]",
+            "orgCode": "[REDACTED]",
+            "schulCrseScCode": "[REDACTED]",
+            "schulKndScCode": "[REDACTED]",
+            "atptOfcdcScCode": "[REDACTED]0"
+        },
+        "id": "sh9351",
+        "name": "임세훈",
+        "birthday": "[REDACTED]",
+        "grade": "[REDACTED]",
+        "class": "[REDACTED]",
+        "usageRestricted": false,
+        "stdntPNo": "[REDACTED]",
+        "parentalVerification": {
+            "verified": true
+        }
+    },
+    "password": "[REDACTED]",
+    "salt": "[REDACTED]"
+}

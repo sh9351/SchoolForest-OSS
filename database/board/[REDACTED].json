@@ -1,0 +1,46 @@
+{
+    "잡다한게시판": {
+        "author": "sh9351",
+        "articles": [
+            {
+                "title": "신년 인사",
+                "text": "<p>안녕하세요, 신년 인사가 많이 늦었네요. </p>",
+                "author": "sh9351",
+                "time": 1675349823496,
+                "id": "xp7jhyuxvzs",
+                "comments": []
+            },
+            {
+                "title": "[REDACTED] 잘생김",
+                "text": "<p><strong>100% 사실입니다</strong></p>",
+                "author": "sh9351",
+                "time": 1664669895234,
+                "id": "jcx70dpb61n",
+                "comments": []
+            },
+            {
+                "title": "새로운 게시글22",
+                "text": "<p><del>조용하게</del></p>",
+                "author": "sh9351",
+                "time": 1663848137154,
+                "id": "9311a64xnpa",
+                "comments": []
+            },
+            {
+                "title": "새로운 게시글",
+                "text": "<p><strong>진지하게</strong></p>",
+                "author": "sh9351",
+                "time": 1663848069509,
+                "id": "91pyhll8i3c",
+                "comments": [
+                    {
+                        "text": "평범하게\n룰루랄라~",
+                        "author": "sh9351",
+                        "time": 1663848154946
+                    }
+                ]
+            }
+        ],
+        "time": 1663848044093
+    }
+}

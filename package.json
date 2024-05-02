@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "@ko_kr/id": "^0.2.1",
+    "cookie-parser": "^1.4.6",
+    "crypto-js": "^4.1.1",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "express-rate-limit": "^6.6.0",
+    "korcen": "^0.2.4",
+    "pm2": "^5.2.0"
+  }
+}

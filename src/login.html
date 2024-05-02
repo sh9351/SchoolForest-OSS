@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js"></script> -->
+    <title>로그인 | 학교숲</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+        * {
+            font-family: Pretendard;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        html::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="container">
+            <header
+                class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+                <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+                    <img src="/logo.png" width="40" height="40">
+                    <h2 class="ms-3">학교숲</h2>
+                </a>
+                <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="#" class="nav-link px-2 link-dark">시간표</a></li>
+                    <li><a href="#" class="nav-link px-2 link-dark">커뮤니티</a></li>
+                </ul>
+                <div class="col-md-3 text-end">
+                    <button type="button" class="btn btn-outline-primary me-2">로그인</button>
+                    <button type="button" class="btn btn-primary">회원가입</button>
+                </div>
+            </header>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h1>우리만의 또다른 학교, 학교숲</h1>
+                    <h3>오늘의 급식과 시간표, 이번달의 학사일정 뿐만 아니라</h3>
+                    <h3>우리 학교만의 수다방과 인기 도서까지!</h3>
+                    <h3>
+                        <a href="/" class="text-decoration-none">학교숲의 장점 보러가기 →</a>
+                    </h3>
+                </div>
+                <div class="col">
+                    <div class="row mb-2">
+                        <div class="col">
+                            <h3>이름</h3>
+                            <input type="text" class="form-control loginName" placeholder="김민준">
+                        </div>
+                        <div class="col">
+                            <h3>생년월일</h3>
+                            <input type="number" class="form-control loginBirthday" placeholder="20080512">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col">
+                            <h3>비밀번호</h3>
+                            <input type="password" class="form-control loginPassword" placeholder="jmk215080^">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button class="btn btn-primary w-100 loginButton">로그인</button>
+                        </div>
+                        <div class="col">
+                            <a href="/signup" class="btn btn-primary w-100">회원가입</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+                <div class="col-md-4 d-flex align-items-center">
+                    <img src="/logo.png" width="50" height="50" class="me-2">
+                    <span>&copy; 2022 <a href="https://sh9351.github.io" class="text-decoration-noner">임세훈</a>이 ❤️을 담아
+                        제작했어요</span>
+                </div>
+                <a href="https://getbootstrap.kr">Bootstrap으로 만들었어요</a>
+            </footer>
+        </div>
+    </main>
+    <script>
+        window.api = (url, body) => new Promise(resolve => fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => {
+            if (res.ok) res.json().then(resolve)
+            else res.text().then(alert)
+        }))
+
+        const loginName = document.querySelector('.loginName')
+        const loginBirthday = document.querySelector('.loginBirthday')
+        const loginPassword = document.querySelector('.loginPassword')
+        const loginButton = document.querySelector('.loginButton')
+        loginButton.addEventListener('click', () => {
+            if (!loginName.value.match('^[ㄱ-ㅎ|가-힣]+$')) {
+                alert('이름에는 한글만 입력할 수 있어요.')
+                return
+            }
+            if (!Number(loginBirthday.value)) {
+                alert('생년월일에는 숫자만 입력할 수 있어요.')
+                return
+            }
+            if (loginBirthday.value.length != 8) {
+                alert('생년월일은 8자리의 숫자만 입력할 수 있어요.')
+                return
+            }
+            if (loginName.value == '김민준' && loginBirthday.value == '20080512' && loginPassword.value == 'jmk215080^') {
+                alert('이세계를 찾을 수 없어요.')
+                return
+            }
+            api('/api/login', {
+                name: loginName.value,
+                birthday: loginBirthday.value,
+                password: loginPassword.value
+            }).then(data => {
+                document.cookie = 'token=' + data.cookie
+                location.href = '/'
+            })
+        })
+    </script>
+</body>
+
+</html>

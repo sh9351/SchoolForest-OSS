@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js"></script> -->
+    <title>회원가입 | 학교숲</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+        * {
+            font-family: Pretendard;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        html::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="container">
+            <header
+                class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+                <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+                    <img src="/logo.png" width="40" height="40">
+                    <h2 class="ms-3">학교숲</h2>
+                </a>
+                <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="#" class="nav-link px-2 link-dark">시간표</a></li>
+                    <li><a href="#" class="nav-link px-2 link-dark">커뮤니티</a></li>
+                </ul>
+                <div class="col-md-3 text-end">
+                    <button type="button" class="btn btn-outline-primary me-2">로그인</button>
+                    <button type="button" class="btn btn-primary">회원가입</button>
+                </div>
+            </header>
+        </div>
+        <div class="container">
+            <div class="mb-3">
+                <h1>회원가입</h1>
+                <h3>학교숲에 오신 것을 환영해요! 학교숲은 누구나 사용할 수 있는 학교 소통 서비스에요.</h3>
+                <h3>오늘의 급식과 시간표부터 실명 커뮤니티까지, 모두 회원가입 후 바로 사용할 수 있어요.</h3>
+            </div>
+            <div class="border border-black rounded">
+                <div class="m-2">
+                    <div class="list-group step1">
+                        <h3>학교숲의 약관 및 개인정보 처리방침에 동의해 주세요.</h3>
+                        <li class="list-group-item">
+                            <input class="form-check-input me-1 signupCheckbox" type="checkbox">
+                            <label class="form-check-label">학교숲의 <a href="/tos.html" class="text-decoration-none">약관</a>과 <a
+                                    href="/privacy_policy.html" class="text-decoration-none">개인정보 처리방침</a>에 동의해요.</label>
+                        </li>
+                    </div>
+                    <div class="step2 d-none">
+                        <h3>현재 다니고 있는 학교를 선택해 주세요.</h3>
+                        <div class="input-group">
+                            <input class="form-control signupSchoolSearch">
+                            <button type="button" class="btn btn-primary signupSchoolSearchButton">검색</button>
+                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">학교 이름</th>
+                                    <th scope="col">학교 주소</th>
+                                </tr>
+                            </thead>
+                            <tbody class="signupSchoolSearchResults">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="step3 d-none">
+                        <h3>기본적인 정보를 입력해 주세요.</h3>
+                        <div class="row">
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <h3>이름</h3>
+                                    <input type="text" class="form-control signupName" placeholder="김민준">
+                                </div>
+                                <div class="col">
+                                    <h3>생년월일</h3>
+                                    <input type="number" class="form-control signupBirthday" placeholder="20080512">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <h3>학년</h3>
+                                    <input type="number" class="form-control signupGrade" placeholder="2">
+                                </div>
+                                <div class="col">
+                                    <h3>반</h3>
+                                    <input type="number" class="form-control signupClass" placeholder="2">
+                                </div>
+                                <div class="col">
+                                    <h3>번호</h3>
+                                    <input type="number" class="form-control signupNumber" placeholder="5">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <h3>아이디</h3>
+                                    <input type="text" class="form-control signupID" placeholder="jkmin">
+                                </div>
+                                <div class="col">
+                                    <h3>비밀번호</h3>
+                                    <input type="password" class="form-control signupPW" placeholder="jmk215080^">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <button class="btn btn-primary w-100 signupButton">회원가입</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+                <div class="col-md-4 d-flex align-items-center">
+                    <img src="/logo.png" width="50" height="50" class="me-2">
+                    <span>&copy; 2022 <a href="https://sh9351.github.io" class="text-decoration-noner">임세훈</a>이 ❤️을 담아
+                        제작했어요</span>
+                </div>
+                <a href="https://getbootstrap.kr">Bootstrap으로 만들었어요</a>
+            </footer>
+        </div>
+    </main>
+    <script>
+        const step1 = document.querySelector('.step1')
+        const step2 = document.querySelector('.step2')
+        const step3 = document.querySelector('.step3')
+        const signupCheckbox = document.querySelector('.signupCheckbox')
+        const signupSchoolSearch = document.querySelector('.signupSchoolSearch')
+        const signupSchoolSearchButton = document.querySelector('.signupSchoolSearchButton')
+        const signupSchoolSearchResults = document.querySelector('.signupSchoolSearchResults')
+        const signupName = document.querySelector('.signupName')
+        const signupBirthday = document.querySelector('.signupBirthday')
+        const signupGrade = document.querySelector('.signupGrade')
+        const signupClass = document.querySelector('.signupClass')
+        const signupNumber = document.querySelector('.signupNumber')
+        const signupID = document.querySelector('.signupID')
+        const signupPW = document.querySelector('.signupPW')
+        const signupButton = document.querySelector('.signupButton')
+
+        signupCheckbox.addEventListener('click', () => {
+            if (signupCheckbox.checked) {
+                step1.classList.add('d-none')
+                step2.classList.remove('d-none')
+                signupSchoolSearchButton.addEventListener('click', () => {
+                    api('/api/signup/school', {
+                        schoolName: signupSchoolSearch.value
+                    }).then(data => {
+                        signupSchoolSearchResults.innerHTML = ''
+                        data.forEach(i => {
+                            const tr = document.createElement('tr')
+                            const name = document.createElement('td')
+                            name.innerHTML = i.kraOrgNm
+                            tr.appendChild(name)
+                            const address = document.createElement('td')
+                            address.innerHTML = i.zipAdres
+                            tr.appendChild(address)
+                            tr.addEventListener('click', () => {
+                                step2.classList.add('d-none')
+                                step3.classList.remove('d-none')
+                                signupButton.addEventListener('click', () => api('/api/signup', {
+                                    school: i,
+                                    gradeNumber: signupGrade.value,
+                                    classNumber: signupClass.value,
+                                    name: signupName.value,
+                                    birthday: signupBirthday.value,
+                                    number: signupNumber.value,
+                                    id: signupID.value,
+                                    password: signupPW.value
+                                }).then(data => {
+                                    alert('회원가입에 성공했어요.')
+                                    document.cookie = 'token=' + data.cookie
+                                    location.href = '/'
+                                }))
+                            })
+                            signupSchoolSearchResults.appendChild(tr)
+                        })
+                    })
+                })
+            }
+        })
+
+        window.api = (url, body) => new Promise(resolve => fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => {
+            if (res.ok) res.json().then(resolve)
+            else res.text().then(alert)
+        }))
+    </script>
+</body>
+
+</html>
